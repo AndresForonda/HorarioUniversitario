@@ -11,9 +11,17 @@ app.use(bodyParser.json())
 app.use(cors())
 
 // this is a path or route => http://localhost:8081/status
-app.get('/status', (req, res) => {
+// app.get('/status', (req, res) => {
+//   res.send({
+//     message: 'hello world'
+//   })
+// })
+
+// register endpoint
+
+app.post('/register', (req, res) => {
   res.send({
-    message: 'hello world'
+    message: `Hello ${req.body.email}, Your user was registered! have fun`
   })
 })
 

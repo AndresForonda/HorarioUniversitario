@@ -3,7 +3,7 @@
     <v-flex xs6 offset-xs3>
       <div class="white elevation-2">
         <v-toolbar flat dense color="blue">
-          <v-toolbar-title>Registro</v-toolbar-title>
+          <v-toolbar-title>Login</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
           <v-text-field
@@ -21,8 +21,8 @@
           <div class="error" v-html="error" />
           <br>
           <v-btn class="blue"
-            @click="register">
-            Registrar
+            @click="login">
+            Login
           </v-btn>
         </div>
       </div>
@@ -37,17 +37,20 @@ export default {
     return {
       email: '',
       password: '',
-      status: false,
       error: null
     }
   },
+  watch: {
+    email (value) {
+      console.log('Email has changed', value)
+    }
+  },
   methods: {
-    async register () {
+    async login () {
       try {
-        await AuthenticationService.register({
+        await AuthenticationService.login({
           email: this.email,
-          password: this.password,
-          status: this.status
+          password: this.password
         })
         this.error = null
       } catch (error) {

@@ -9,5 +9,8 @@ module.exports = {
       host: process.env.HOST || 'localhost',
       storage: './horarioUniversidad.sqlite'
     }
+  },
+  authentication: {
+    jwtSecret: process.env.JWE_SECRET || 'secret'
   }
 }

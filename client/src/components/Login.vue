@@ -40,11 +40,6 @@ export default {
       error: null
     }
   },
-  watch: {
-    email (value) {
-      console.log('Email has changed', value)
-    }
-  },
   methods: {
     async login () {
       try {

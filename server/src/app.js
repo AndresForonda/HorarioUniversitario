@@ -13,14 +13,8 @@ app.use(bodyParser.json())
 app.use(cors())
 
 require('./routes')(app)
-// this is a path or route => http://localhost:8081/status
-// app.get('/status', (req, res) => {
-//   res.send({
-//     message: 'hello world'
-//   })
-// })
 
-sequelize.sync({force: true})
+sequelize.sync()
   .then(() => {
     // The server is listening on this port
     app.listen(config.port)

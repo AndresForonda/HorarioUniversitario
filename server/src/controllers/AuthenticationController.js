@@ -48,11 +48,17 @@ module.exports = {
         })
       }
 
-      if (user && isPasswordValid && user.status === 'true') {
-        return res.status(200).send({
-          success: 'Login in'
-        })
-      }
+      // if (isPasswordValid && user.status === 'true') {
+      //   return res.status(200).send({
+      //     success: 'Login in'
+      //   })
+      // }
+
+      const userJson = user.toJSON()
+      res.send({
+        user: userJson,
+        token: jwtSingUser(userJson)
+      })
     } catch (err) {
       // email already exists
       res.status(500).send({

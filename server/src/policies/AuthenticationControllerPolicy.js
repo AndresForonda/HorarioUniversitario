@@ -2,6 +2,7 @@ const Joi = require('joi')
 
 module.exports = {
   register (req, res, next) {
+    req.body.status = 'true'
     const schema = {
       email: Joi.string().email(),
       password: Joi.string().regex(

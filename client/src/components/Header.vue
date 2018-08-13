@@ -9,18 +9,26 @@
       </v-toolbar-items> -->
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn to="/" flat dark>
-            Inicio
-        </v-btn>
-      </v-toolbar-items>
-      <v-toolbar-items>
-        <v-btn to="/login" flat dark>
+        <v-btn
+          v-if="!$store.state.isUserLoggedIn"
+          to="/login"
+          flat
+          dark>
             Login
         </v-btn>
-      </v-toolbar-items>
-      <v-toolbar-items>
-        <v-btn to="/register" flat dark>
+        <v-btn
+          v-if="!$store.state.isUserLoggedIn"
+          to="/register"
+          flat
+          dark>
             Registrarse
+        </v-btn>
+        <v-btn
+          v-if="$store.state.isUserLoggedIn"
+          @click="logout"
+          flat
+          dark>
+            Cerrar sesión
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -30,6 +38,13 @@ export default {
   methods: {
     navigateTo (route) {
       this.$route.push(route)
+    },
+    logout () {
+      this.$store.dispatch('setToken', null)
+      this.$store.dispatch('setUser', null)
+      this.$router.push({
+        name: 'login'
+      })
     }
   }
 }

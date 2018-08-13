@@ -49,13 +49,14 @@ export default {
   methods: {
     async register () {
       try {
-        const response = await AuthenticationService.register({
+        // const response = await AuthenticationService.register({
+        await AuthenticationService.register({
           email: this.email,
           password: this.password,
           status: this.status
         })
-        this.$store.dispatch('setToken', response.data.token)
-        this.$store.dispatch('setUser', response.data.user)
+        // this.$store.dispatch('setToken', response.data.token)
+        // this.$store.dispatch('setUser', response.data.user)
       } catch (error) {
         this.error = error.response.data.error
       }

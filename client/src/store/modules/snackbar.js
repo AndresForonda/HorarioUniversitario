@@ -10,6 +10,15 @@ export default new Vuex.Store({
     user: null,
     isUserLoggedIn: false
   },
+  snackBar: {
+    status: false,
+    timeout: '3000',
+    right: true,
+    top: true,
+    color: '',
+    vertical: true,
+    text: ''
+  },
   mutations: {
     setToken (state, token) {
       state.token = token
@@ -21,6 +30,11 @@ export default new Vuex.Store({
     },
     setUser (state, user) {
       state.user = user
+    },
+    setSnackBar (snackBar, status, color, text) {
+      snackBar.status = status
+      snackBar.color = color
+      snackBar.text = text
     }
   },
   actions: {
@@ -29,6 +43,9 @@ export default new Vuex.Store({
     },
     setUser ({commit}, user) {
       commit('setUser', user)
+    },
+    setSnackBar ({commit}, status, color, text) {
+      commit('setSnackBar', status, color, text)
     }
   }
 })

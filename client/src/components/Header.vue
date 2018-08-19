@@ -1,12 +1,21 @@
 <template>
     <v-toolbar fixed class="blue">
       <v-toolbar-title class="mr-4">Horarios universitarios</v-toolbar-title>
-      <!-- Todo: Implement me -->
-      <!-- <v-toolbar-items>
-        <v-btn flat dark>
+      <v-toolbar-items>
+        <v-btn
+          flat
+          dark
+          to="songs">
           Browse
         </v-btn>
-      </v-toolbar-items> -->
+        <v-btn
+          v-if="$store.state.isUserLoggedIn"
+          flat
+          dark
+          to="subjects">
+          Materias
+        </v-btn>
+      </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn
@@ -43,7 +52,7 @@ export default {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
       this.$router.push({
-        name: 'login'
+        name: 'root'
       })
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <v-layout row wrap>
-    <v-flex xs12 sm6 offset-sm3 class="elevation-2">
+    <v-flex xs12 sm8 md6 offset-md3 offset-sm2 class="elevation-2">
       <v-card class="blue elevation-3" flat dark>
         <v-card-title class="display-1">
           Materias
@@ -17,14 +17,12 @@
             <v-btn
               slot="activator"
               color="blue"
-              dark
               class="mr-2 mt-2"
-              light
               medium
               right
               middle
               fab>
-              <v-icon>add</v-icon>
+              <v-icon color="white">add</v-icon>
             </v-btn>
             <v-card>
               <v-card-title>
@@ -37,7 +35,7 @@
                       <v-select
                         :items="semesters"
                         label="Semestre"
-                        v-model="editedItem.semester"
+                        v-model="editedSubject.semester"
                         solo
                         required
                         :rules="[required]"
@@ -45,7 +43,7 @@
                     </v-flex>
                     <v-flex xs12 sm6 md8>
                       <v-text-field
-                        v-model="editedItem.subject"
+                        v-model="editedSubject.subject"
                         label="Materia"
                         required
                         :rules="[required]">
@@ -73,9 +71,9 @@
         :headers="headers"
         :items="subjects"
         :search="search"
+        :rows-per-page-text="filas"
         :pagination.sync="pagination"
-        hide-actions
-        class="white headline">
+        class="headline">
         <template slot="items" slot-scope="props">
           <td class="text-xs-center subheading">{{ props.item.semester }}</td>
           <td class="text-xs-left subheading">{{ props.item.subject }}</td>
@@ -84,14 +82,13 @@
               small
               color="success"
               class="mr-2"
-              @click="editItem(props.item)"
+              @click="editSubject(props.item)"
             >
               edit
             </v-icon>
             <v-icon
               small
-              color="red"
-              @click="deleteItem(props.item)"
+              @click="deleteSubject(props.item)"
             >
               delete
             </v-icon>
@@ -105,16 +102,14 @@
         <v-alert slot="no-results" :value="true" color="error" icon="warning">
           Su intento de buscar "{{ search }}" no arrojo resultados.
         </v-alert>
+        <template slot="pageText" slot-scope="props">
+          Mostrando {{ props.pageStart }} - {{ props.pageStop }} de {{ props.itemsLength }}
+        </template>
       </v-data-table>
-      <div class="text-xs-center pt-2">
-        <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
-      </div>
     </v-flex>
-    <snack-bar>
-    </snack-bar>
-    <!-- <v-snackbar
+    <v-snackbar
       v-model="snackbar"
-      :timeout="3000"
+      :timeout="5000"
       :right="true"
       :top="true"
       :color="color"
@@ -128,18 +123,18 @@
       >
         Close
       </v-btn>
-    </v-snackbar> -->
+    </v-snackbar>
   </v-layout>
 </template>
 <script>
 import SubjectsService from '@/services/SubjectsService'
-import SnackBar from '@/components/SnackBar'
 export default {
   data () {
     return {
       snackbar: false,
       text: '',
       color: '',
+      filas: 'Materias por página',
       semesters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       dialog: false,
       search: '',
@@ -171,48 +166,61 @@ export default {
         }
       ],
       editedIndex: -1,
-      editedItem: {
+      editedSubject: {
         semester: '',
         subject: '',
-        status: 1
+        lowerSubject: ''
       },
-      defaultItem: {
+      defaultSubject: {
         semester: '',
         subject: '',
-        status: 1
+        lowerSubject: ''
       },
       required: (value) => !!value || 'Required.'
     }
   },
-  components: {
-    SnackBar
-  },
   methods: {
+    // Borrar materia
+    async deleteSubject (item) {
+      const subjectDel = item.id
+      try {
+        if (confirm('Are you sure you want to delete this item?') && await SubjectsService.delete(subjectDel)) {
+          this.callSnackBar(true, 'success', 'Materia eliminada exitosamente')
+          this.getSubjects()
+        }
+      } catch (err) {
+        this.callSnackBar(true, 'error', 'Error al intentar eliminar la materia.')
+      }
+    },
     // Crear materia
     async createSubject () {
       this.error = null
+      this.editedSubject.lowerSubject = this.editedSubject.subject.toLowerCase().trim()
       const areAllFieldsFilledIn = Object
-        .keys(this.editedItem)
-        .every(key => !!this.editedItem[key])
+        .keys(this.editedSubject)
+        .every(key => !!this.editedSubject[key])
       if (!areAllFieldsFilledIn) {
-        // this.snackbar = true
-        // this.color = 'primary'
-        // this.text = 'Seleccione semestre e ingrese el nombre de la materia.'
+        this.callSnackBar(true, 'primary', 'Seleccione semestre e ingrese el nombre de la materia.')
         return
       }
-      try {
-        await SubjectsService.post(this.editedItem)
-        this.getSubjects()
-        this.close()
-        this.$store.dispatch('setSnackBar', true, 'success', 'Materia creada exitosamente.')
-        // this.snackbar = true
-        // this.color = 'success'
-        // this.text = 'Materia creada exitosamente.'
-      } catch (err) {
-        // this.snackbar = true
-        // this.color = 'error'
-        // this.text = 'Error al intentar crear la materia.'
-        console.log(err)
+      if (this.editedIndex > -1) {
+        try {
+          await SubjectsService.put(this.editedSubject)
+          this.callSnackBar(true, 'success', 'Materia actualizada exitosamente')
+          this.getSubjects()
+          this.close()
+        } catch (err) {
+          this.callSnackBar(true, 'error', 'Error al intentar actualizar la materia, verifique que no haya sido creada previamente.')
+        }
+      } else {
+        try {
+          await SubjectsService.post(this.editedSubject)
+          this.callSnackBar(true, 'success', 'Materia creada exitosamente')
+          this.getSubjects()
+          this.close()
+        } catch (err) {
+          this.callSnackBar(true, 'error', 'Error al intentar crear la materia, verifique que no haya sido creada previamente.')
+        }
       }
     },
     // Obtener todas las materias
@@ -222,9 +230,19 @@ export default {
     close () {
       this.dialog = false
       setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedSubject = Object.assign({}, this.defaultSubject)
         this.editedIndex = -1
       }, 300)
+    },
+    callSnackBar (status, color, text) {
+      this.snackbar = status
+      this.color = color
+      this.text = text
+    },
+    editSubject (item) {
+      this.editedIndex = item.id
+      this.editedSubject = Object.assign({}, item)
+      this.dialog = true
     }
   },
   computed: {
@@ -235,7 +253,7 @@ export default {
       ) return 0
       return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
     },
-    // Titulo del formato para agregar o editar materia
+    // Titulo del formulario para agregar o editar materia
     formTitle () {
       return this.editedIndex === -1 ? 'Agregar Materia' : 'Editar Materia'
     }
@@ -255,8 +273,16 @@ export default {
   async mounted () {
     // Obtener materias
     this.getSubjects()
+    if (!this.$store.state.login.isUserLoggedIn) {
+      this.$router.push({
+        name: 'root'
+      })
+    }
   }
 }
 </script>
 <style>
+  html {
+    overflow: hidden
+  }
 </style>

@@ -19,4 +19,8 @@ module.exports = (app) => {
     SubjectsController.index)
   app.post('/subjects',
     SubjectsController.post)
+  app.put('/subjects',
+    SubjectsController.put)
+  app.delete('/subjects/:id',
+    SubjectsController.delete)
 }

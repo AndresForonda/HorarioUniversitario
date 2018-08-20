@@ -1,8 +1,8 @@
 <template lang="html">
   <v-layout>
-    <v-flex xs6 offset-xs3>
+    <v-flex xs8 sm6 md4 offset-md4 offset-sm3 offset-xs2>
       <div class="white elevation-2">
-        <v-toolbar flat dense color="blue">
+        <v-toolbar flat dense dark color="blue">
           <v-toolbar-title>Registro</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
@@ -24,7 +24,7 @@
             <br>
             <div class="error" v-html="error" />
             <br>
-            <v-btn class="blue"
+            <v-btn dark class="blue"
               @click="register">
               Registrar
             </v-btn>

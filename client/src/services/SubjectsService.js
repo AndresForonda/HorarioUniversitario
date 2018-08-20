@@ -6,5 +6,13 @@ export default {
   },
   post (subject) {
     return Api().post('subjects', subject)
+  },
+  put (subject) {
+    console.log(subject)
+    return Api().put('subjects', subject)
+  },
+  delete (subjectId) {
+    console.log(subjectId)
+    return Api().delete(`subjects/${subjectId}`)
   }
 }

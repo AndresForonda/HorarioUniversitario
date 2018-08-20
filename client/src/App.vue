@@ -2,9 +2,10 @@
   <div id="app">
     <v-app>
       <page-header />
+
       <main>
         <v-container fluid>
-          <router-view/>
+          <router-view></router-view>
         </v-container>
       </main>
     </v-app>
@@ -13,6 +14,7 @@
 
 <script>
 import PageHeader from '@/components/Header.vue'
+
 export default {
   name: 'App',
   components: {
@@ -29,9 +31,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-
-.v-toolbar__title, .v-btn__content {
-  color: white;
 }
 </style>

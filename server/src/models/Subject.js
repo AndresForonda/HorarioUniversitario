@@ -6,11 +6,12 @@ module.exports = (sequelize, Datatypes) => {
     },
     subject: {
       type: Datatypes.STRING,
-      unique: true,
-      allowNull: false
+      allowNull: false,
+      quoteIdentifiers: false
     },
-    status: {
-      type: Datatypes.BOOLEAN,
+    lowerSubject: {
+      type: Datatypes.STRING,
+      unique: true,
       allowNull: false
     }
   })

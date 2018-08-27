@@ -2,6 +2,7 @@ const AuthenticationController = require('./controllers/AuthenticationController
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 const SongsController = require('./controllers/SongsController')
 const SubjectsController = require('./controllers/SubjectsController')
+const SemestersController = require('./controllers/SemestersController')
 module.exports = (app) => {
   // register endpoint
   app.post('/register',
@@ -15,6 +16,7 @@ module.exports = (app) => {
   app.post('/songs',
     SongsController.post)
 
+  // Subjects endpoints
   app.get('/subjects',
     SubjectsController.index)
   app.post('/subjects',
@@ -23,4 +25,14 @@ module.exports = (app) => {
     SubjectsController.put)
   app.delete('/subjects/:id',
     SubjectsController.delete)
+
+  // Semesters endpoints
+  app.get('/semesters',
+    SemestersController.index)
+  app.post('/semesters',
+    SemestersController.post)
+  app.put('/semesters',
+    SemestersController.post)
+  app.delete('/semesters/:id',
+    SemestersController.delete)
 }

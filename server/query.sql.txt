@@ -1,0 +1,485 @@
+INSERT INTO `Subjects`(`id`,`semester`,`subject`,`lowerSubject`,`createdAt`,`updatedAt`) VALUES (NULL,1,'Lol','lol','time','time')
+
+-- phpMyAdmin SQL Dump
+-- version 4.7.7
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost
+-- Tiempo de generación: 23-02-2018 a las 13:14:16
+-- Versión del servidor: 10.1.31-MariaDB
+-- Versión de PHP: 5.6.32
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `horario`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `administrador`
+--
+
+CREATE TABLE `administrador` (
+  `USERNAMEADM` varchar(30) NOT NULL,
+  `GRUPO` varchar(30) DEFAULT NULL,
+  `SEMESTREGRUPO` int(11) DEFAULT NULL,
+  `PASWORDADM` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bloquehorario`
+--
+
+CREATE TABLE `bloquehorario` (
+  `IDBLOQUEHO` int(11) NOT NULL,
+  `GRUPO` varchar(30) NOT NULL,
+  `SEMESTREGRUPO` int(11) NOT NULL,
+  `DIABLOQUE` varchar(30) NOT NULL,
+  `HORASBLOQUE` int(11) NOT NULL,
+  `ANIOPERIODOACA` int(11) NOT NULL,
+  `SUBSEMESTREPERIODOACA` int(11) NOT NULL,
+  `IDMATERIA` int(11) DEFAULT NULL,
+  `CORREOPROF` varchar(30) DEFAULT NULL,
+  `NUMEROSALON` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `bloquehorario`
+--
+
+INSERT INTO `bloquehorario` (`IDBLOQUEHO`, `GRUPO`, `SEMESTREGRUPO`, `DIABLOQUE`, `HORASBLOQUE`, `ANIOPERIODOACA`, `SUBSEMESTREPERIODOACA`, `IDMATERIA`, `CORREOPROF`, `NUMEROSALON`) VALUES
+(19, 'B', 1, 'Jueves', 10, 2018, 1, 10, 'VACIO4', '201'),
+(20, 'B', 1, 'Lunes', 12, 2018, 1, 12, 'VACIO72', '201'),
+(21, 'B', 1, 'Miercoles', 10, 2018, 1, 12, 'VACIO72', '201'),
+(22, 'B', 1, 'Jueves', 12, 2018, 1, 11, 'VACIO4', '201'),
+(23, 'B', 1, 'Viernes', 10, 2018, 1, 11, 'VACIO4', '201'),
+(24, 'A', 2, 'Miercoles', 12, 2018, 1, 18, 'VACIO72', '101'),
+(25, 'A', 2, 'Viernes', 12, 2018, 1, 18, 'VACIO72', '101'),
+(26, 'A', 2, 'Viernes', 1, 2018, 1, 14, 'VACIO4', '101'),
+(27, 'A', 2, 'Lunes', 10, 2018, 1, 17, 'VACIO66', '101'),
+(31, 'A', 2, 'Martes', 12, 2018, 1, 16, 'VACIO13', '101'),
+(32, 'A', 2, 'Jueves', 12, 2018, 1, 16, 'VACIO13', '103'),
+(33, 'A', 2, 'Martes', 10, 2018, 1, 15, 'VACIO61', '103'),
+(34, 'A', 2, 'Miercoles', 10, 2018, 1, 15, 'VACIO61', '103'),
+(35, 'B', 2, 'Lunes', 10, 2018, 1, 19, 'VACIO15', '103'),
+(36, 'B', 2, 'Jueves', 12, 2018, 1, 18, 'VACIO72', '104'),
+(37, 'B', 2, 'Viernes', 10, 2018, 1, 18, 'VACIO72', '104'),
+(38, 'B', 2, 'Sabado', 3, 2018, 1, 14, 'VACIO4', '101'),
+(39, 'B', 2, 'Miercoles', 10, 2018, 1, 17, 'VACIO66', '104'),
+(40, 'B', 2, 'Martes', 10, 2018, 1, 17, 'VACIO66', '104'),
+(41, 'B', 2, 'Jueves', 10, 2018, 1, 16, 'VACIO70', '103'),
+(42, 'B', 2, 'Viernes', 12, 2018, 1, 16, 'VACIO70', '103'),
+(43, 'B', 2, 'Lunes', 12, 2018, 1, 15, 'VACIO61', '104'),
+(44, 'B', 2, 'Martes', 12, 2018, 1, 15, 'VACIO61', '104'),
+(46, 'A', 1, 'Lunes', 1, 2018, 1, 9, 'VACIO1', '101'),
+(47, 'A', 1, 'Martes', 4, 2018, 1, 9, 'VACIO1', '101'),
+(48, 'A', 7, 'Jueves', 10, 2018, 1, 58, 'VACIO19', '112'),
+(49, 'A', 7, 'Martes', 10, 2018, 1, 53, 'VACIO16', '113');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `grupoestudiantes`
+--
+
+CREATE TABLE `grupoestudiantes` (
+  `GRUPO` varchar(30) NOT NULL,
+  `SEMESTREGRUPO` int(11) NOT NULL,
+  `ESTADOGRUPO` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `grupoestudiantes`
+--
+
+INSERT INTO `grupoestudiantes` (`GRUPO`, `SEMESTREGRUPO`, `ESTADOGRUPO`) VALUES
+('A', 1, 1),
+('A', 2, 1),
+('A', 3, 1),
+('A', 4, 1),
+('A', 5, 1),
+('A', 6, 1),
+('A', 7, 1),
+('A', 8, 1),
+('A', 9, 1),
+('A', 10, 1),
+('A', 11, 1),
+('B', 1, 1),
+('B', 2, 1),
+('B', 3, 1),
+('B', 4, 1),
+('B', 5, 1),
+('B', 6, 1),
+('B', 7, 1),
+('B', 8, 1),
+('B', 9, 1),
+('B', 10, 1),
+('C', 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `hora`
+--
+
+CREATE TABLE `hora` (
+  `IDHORA` int(11) NOT NULL,
+  `HORAS` varchar(30) NOT NULL,
+  `NUMHORAS` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `hora`
+--
+
+INSERT INTO `hora` (`IDHORA`, `HORAS`, `NUMHORAS`) VALUES
+(0, 'Ninguna', 0),
+(1, '7:00A.M. - 9:00A.M.', 2),
+(2, '7:00A.M - 11:00A.M.', 4),
+(3, '9:00A.M. - 11:00A.M.', 2),
+(4, '8:00A.M - 10:00A.M', 2),
+(5, '8:00A.M. - 12:00M.', 4),
+(6, '10:00A.M. - 12:00M.', 2),
+(7, '11:00A.M. - 1:00P.M.', 2),
+(8, '2:00P.M. - 4:00P.M.', 2),
+(9, '4:00P.M. - 6:00P.M.', 2),
+(10, '6:00P.M. - 8:00P.M.', 2),
+(11, '6:00P.M. - 10:00P.M.', 4),
+(12, '8:00P.M. - 10:00P.M.', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `materia`
+--
+
+CREATE TABLE `materia` (
+  `IDMATERIA` int(11) NOT NULL,
+  `ESTADOMAT` tinyint(1) NOT NULL,
+  `NOMBREMAT` varchar(30) NOT NULL,
+  `SEMESTREMAT` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `materia`
+--
+
+INSERT INTO `materia` (`IDMATERIA`, `ESTADOMAT`, `NOMBREMAT`, `SEMESTREMAT`) VALUES
+(1, 1, 'Electiva sectorial Aspectos Ju', 0),
+(2, 1, 'ELECTIVA SECTORIAL F POSTCONFL', 0),
+(3, 1, 'CONSULTORIO JURIDICO III', 10),
+(4, 1, 'Electiva sectorial Derecho Cam', 10),
+(5, 1, 'ELECTIVA SECTORIAL F Derecho T', 10),
+(6, 1, 'Electiva sectorial Regimen de ', 10),
+(7, 1, 'ETICA PROFESIONAL', 10),
+(8, 1, 'TESIS, PREPARATORIO O JUDICATU', 11),
+(9, 1, 'FISH-LECTOESCRITURA', 1),
+(10, 1, 'HERMENEUTICA JURIDICA', 1),
+(11, 1, 'HISTORIA DEL DERECHO E INSTITU', 1),
+(12, 1, 'HISTORIA INSTITUCIONAL', 1),
+(13, 1, 'INTRODUCCION AL DERECHO', 1),
+(14, 1, 'ARGUMENTACIÒN JURIDICA', 2),
+(15, 1, 'DERECHO PENAL GENERAL', 2),
+(16, 1, 'PERSONAS Y TEORIA DEL NEGOCIO ', 2),
+(17, 1, 'TEORIA DE LA CONSTITUCIÒN Y DE', 2),
+(18, 1, 'TEORIA DEL ESTADO', 2),
+(19, 1, 'TEORIA ECONOMICA Y ECONOMIA CO', 2),
+(20, 1, 'BIENES', 3),
+(21, 1, 'PRINCIPIOS, ESTRUCTURA DEL EST', 3),
+(22, 1, 'SOCIOLOGIA JURIDICA', 3),
+(23, 1, 'TEORÍA DEL DELITO', 3),
+(24, 1, 'TEORIA GENERAL DEL PROCESO', 3),
+(25, 1, 'TEORÍAS Y EPISTEMOLOGÍA DEL DE', 3),
+(26, 1, 'DERECHO CONSTITUCIONALES', 4),
+(27, 1, 'DERECHO PENAL ESPECIAL', 4),
+(28, 1, 'DERECHO PROCESAL CIVIL GENERAL', 4),
+(29, 1, 'FILOSOFIA DEL DERECHO', 4),
+(30, 1, 'OBLIGACIONES', 4),
+(31, 1, 'TEORIA GENERAL DEL TRABAJO Y R', 4),
+(32, 1, 'CONTRATOS PRIVADOS', 5),
+(33, 1, 'DERECHO COMERCIAL GENERAL Y SO', 5),
+(34, 1, 'DERECHO DE LAS RELACIONES LABO', 5),
+(35, 1, 'DERECHO INTERNACIONAL Y RELACI', 5),
+(36, 1, 'DERECHO PROBATORIO', 5),
+(37, 1, 'ELECTIVA SECTORIAL A Introducc', 5),
+(38, 1, 'Electiva Sectorial: Derecho So', 5),
+(39, 1, 'ELECTIVA SECTORIAL Desarrollo ', 5),
+(40, 1, 'ELECTIVA SECTORIAL Régimen dis', 5),
+(41, 1, 'DERECHO ADMINISTRATIVO GENERAL', 6),
+(42, 1, 'DERECHO DE FAMILIA', 6),
+(43, 1, 'DERECHO LABORAL COLECTIVO', 6),
+(44, 1, 'DERECHO PROCESAL CIVIL ESPECIA', 6),
+(45, 1, 'ELECTIVA SECTORIAL B Acciones ', 6),
+(46, 1, 'ELECTIVA SECTORIAL B Derechos ', 6),
+(47, 1, 'ELECTIVA SECTORIAL Formas desl', 6),
+(48, 1, 'ELECTIVA SECTORIAL MEDICINA LE', 6),
+(49, 1, 'PPIOS Y FUNDAMENTOS DELDERECHO', 6),
+(50, 1, 'SEMINARIO DE METODOS TECNICAS ', 6),
+(51, 1, 'ACTIVIDAD O PROYECTO DE INVEST', 7),
+(52, 1, 'CONTRATACIÓN ESTATAL Y RESPONS', 7),
+(53, 1, 'DERECHO COMERCIAL TITULOS VALO', 7),
+(54, 1, 'DERECHO PROCESAL LABORAL', 7),
+(55, 1, 'ELECTIVA SECTORIAL C Justicia ', 7),
+(56, 1, 'ELECTIVA SECTORIAL Derecho Lab', 7),
+(57, 1, 'ELECTIVA SECTORIAL Legislación', 7),
+(58, 1, 'ELECTIVA SECTORIAL Pruebas Pen', 7),
+(59, 1, 'ESTRUCTURA DE LA ADMINISTRACIÓ', 7),
+(60, 1, 'ESTRUCTURA Y CONTENIDOS DEL PR', 7),
+(61, 1, 'Mecanismos alternativos de sol', 7),
+(62, 1, 'ACTIVIDAD O PROYECTO DE INVEST', 8),
+(63, 1, 'CONSULTORIO JURIDICO I', 8),
+(64, 1, 'CONSULTORIO JURIDICO I Civil/ ', 8),
+(65, 1, 'DERERECHO DE LA SEGURIDAD SOCI', 8),
+(66, 1, 'ELECTIVA SECTORIAL CRIMINALIST', 8),
+(67, 1, 'ELECTIVA SECTORIAL DERECHO SOC', 8),
+(68, 1, 'ELECTIVA SECTORIAL D FUNCIÓN P', 8),
+(69, 1, 'ELECTIVA SECTORIAL NEGOCIACION', 8),
+(70, 1, 'ELECTIVA SETORIAL D PRINCIPIOS', 8),
+(71, 1, 'ORALIDAD PROCESAL', 8),
+(72, 1, 'PROCEDIMIENTO ADMINISTRATIVO', 8),
+(73, 1, 'ACTIVIDAD O PROYECTO DE INVEST', 9),
+(74, 1, 'CONSULTORIO JURIDICO II', 9),
+(75, 1, 'CONSULTORIO JURIDICO II Admini', 9),
+(76, 1, 'CRIMINOLOGIA', 9),
+(77, 1, 'DERECHO PRIVADO SUCESIONES', 9),
+(78, 1, 'ELECTIVA SECTORIAL Derecho Med', 9),
+(79, 1, 'ELECTIVA SECTORIAL E PLANEACIÓ', 9),
+(80, 1, 'ELECTIVA SECTORIAL Los proceso', 9),
+(81, 1, 'Electiva Setorial: Problemas c', 9);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `profesor`
+--
+
+CREATE TABLE `profesor` (
+  `CORREOPROF` varchar(30) NOT NULL,
+  `NOMBREPROF` varchar(30) NOT NULL,
+  `ESTADOPROF` tinyint(1) NOT NULL,
+  `TELEFONOPROF` varchar(40) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `profesor`
+--
+
+INSERT INTO `profesor` (`CORREOPROF`, `NOMBREPROF`, `ESTADOPROF`, `TELEFONOPROF`) VALUES
+('VACIO1', 'Adriana Arboleda', 1, NULL),
+('VACIO10', 'Camilo Andrés Rosero', 1, NULL),
+('VACIO11', 'Carlos Mario Soto', 1, NULL),
+('VACIO12', 'Carlos Vicente Zúñiga', 1, NULL),
+('VACIO13', 'Carmen Cecilia López', 1, NULL),
+('VACIO14', 'Chrisstian Cabezas Martínez', 1, NULL),
+('VACIO15', 'ciencias contables', 1, NULL),
+('VACIO16', 'Claudia Padilla Montenegro', 1, NULL),
+('VACIO17', 'Claudia Ximena Rosero M.', 1, NULL),
+('VACIO18', 'Doris Manrique', 1, NULL),
+('VACIO19', 'Edison Tovar Nogales', 1, NULL),
+('VACIO20', 'Eduardo Bazante Molano', 1, NULL),
+('VACIO21', 'Efraín Castro Delgado', 1, NULL),
+('VACIO23', 'Eliécer H. Arteaga Ramírez', 1, NULL),
+('VACIO24', 'Fabricio López Zaconni', 1, NULL),
+('VACIO26', 'Favian Andrés Díaz Navia', 1, NULL),
+('VACIO29', 'Fernando Arcesio Bolaños O.', 1, NULL),
+('VACIO3', 'Adrián Sarzosa Fletcher', 1, NULL),
+('VACIO30', 'Franco Hernández Andrés Felipe', 1, NULL),
+('VACIO31', 'Gabriela Ramirez', 1, NULL),
+('VACIO32', 'Gerardo Ernesto Ruíz', 1, NULL),
+('VACIO33', 'Gerson Augusto Guerrero Otoya', 1, NULL),
+('VACIO34', 'Gonzalo Moreno Rengifo', 1, NULL),
+('VACIO36', 'Hugo Aldemar López M.', 1, NULL),
+('VACIO37', 'Hugo Alexánder Velasco', 1, NULL),
+('VACIO38', 'Hugo Garcés', 1, NULL),
+('VACIO39', 'Jackeline Lorena Burbano Orteg', 1, NULL),
+('VACIO4', 'Álvaro Fredy Ordóñez Sánchez', 1, NULL),
+('VACIO40', 'Jacob Aarón Cuéllar B.', 1, NULL),
+('VACIO41', 'Jenny Esperanza Torres M.', 1, NULL),
+('VACIO43', 'Jesús Alberto Gómez Gómez', 1, NULL),
+('VACIO44', 'Jesús H. Paz Constaín', 1, NULL),
+('VACIO45', 'Jorge William Ordóñez F.', 1, NULL),
+('VACIO47', 'José Danilo Cabrera Rosero', 1, NULL),
+('VACIO48', 'José Ramón Cerón Ríos', 1, NULL),
+('VACIO49', 'José Reinaldo Pisso Córdoba', 1, NULL),
+('VACIO5', 'Álvaro Luís Palta A.', 1, NULL),
+('VACIO50', 'Juan David Illera C', 1, NULL),
+('VACIO51', 'Juan Diego Castrillón Orrego', 1, NULL),
+('VACIO52', 'Lilian Marcela Burbano', 1, NULL),
+('VACIO53', 'Lucio Jurado', 1, NULL),
+('VACIO54', 'Magda Beatriz Erazo', 1, NULL),
+('VACIO55', 'Magnolia Andrea Camacho T.', 1, NULL),
+('VACIO56', 'Manuel Antonio Burbano', 1, NULL),
+('VACIO58', 'María del Pilar Carmona Perafá', 1, NULL),
+('VACIO59', 'Mario Javier Rosero M.', 1, NULL),
+('VACIO6', 'Andrés Felipe Franco Hernández', 1, NULL),
+('VACIO60', 'Milton Javier López', 1, NULL),
+('VACIO61', 'Nilsa Eugenia Fajardo', 1, NULL),
+('VACIO62', 'Orlando de Jesús Mosquera', 1, NULL),
+('VACIO63', 'Pablo Alejandro Zúñiga', 1, NULL),
+('VACIO64', 'Ramsés López Santamaría', 1, NULL),
+('VACIO66', 'Roberto Rodríguez Fernández', 1, NULL),
+('VACIO68', 'Rubén Darío Toledo', 1, NULL),
+('VACIO70', 'Sandra Liliana Zúñiga', 1, NULL),
+('VACIO71', 'Sandra Milena Bonilla Mejía', 1, NULL),
+('VACIO72', 'Santiago J, Rodríguez Cabezas', 1, NULL),
+('VACIO75', 'Víctor Hugo López Zemanate', 1, NULL),
+('VACIO76', 'William Andrés Ordóñez B.', 1, NULL),
+('VACIO77', 'William Arley Rengifo', 1, NULL),
+('VACIO78', 'William H. Gómez Gómez', 1, NULL),
+('VACIO8', 'Angélica María Anichiárico G', 1, NULL),
+('VACIO9', 'Anrea Carolina Aramburo Reales', 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `salon`
+--
+
+CREATE TABLE `salon` (
+  `NUMEROSALON` varchar(30) NOT NULL,
+  `CUPOSALON` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `salon`
+--
+
+INSERT INTO `salon` (`NUMEROSALON`, `CUPOSALON`) VALUES
+('101', 45),
+('102', 45),
+('103', 45),
+('104', 45),
+('105', 45),
+('106', 45),
+('107', 45),
+('108', 45),
+('109', 45),
+('110', 45),
+('111', 45),
+('112', 45),
+('113', 45),
+('114', 45),
+('115', 45),
+('116', 45),
+('201', 45),
+('202', 45),
+('203', 45),
+('204', 45),
+('205', 45),
+('206', 45),
+('207', 45),
+('208', 45),
+('209', 45),
+('210', 45),
+('211', 45),
+('Auditorio', 45);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `administrador`
+--
+ALTER TABLE `administrador`
+  ADD PRIMARY KEY (`USERNAMEADM`),
+  ADD KEY `FK_ADMINIST_RELATIONS_GRUPOEST` (`GRUPO`,`SEMESTREGRUPO`);
+
+--
+-- Indices de la tabla `bloquehorario`
+--
+ALTER TABLE `bloquehorario`
+  ADD PRIMARY KEY (`IDBLOQUEHO`),
+  ADD KEY `FK_BLOQUEHO_RELATIONS_GRUPOEST` (`GRUPO`,`SEMESTREGRUPO`),
+  ADD KEY `FK_BLOQUEHO_RELATIONS_MATERIA` (`IDMATERIA`),
+  ADD KEY `FK_BLOQUEHO_RELATIONS_SALON` (`NUMEROSALON`),
+  ADD KEY `FK_BLOQUEHO_RELATIONS_PROFESOR` (`CORREOPROF`);
+
+--
+-- Indices de la tabla `grupoestudiantes`
+--
+ALTER TABLE `grupoestudiantes`
+  ADD PRIMARY KEY (`GRUPO`,`SEMESTREGRUPO`);
+
+--
+-- Indices de la tabla `hora`
+--
+ALTER TABLE `hora`
+  ADD PRIMARY KEY (`IDHORA`,`HORAS`);
+
+--
+-- Indices de la tabla `materia`
+--
+ALTER TABLE `materia`
+  ADD PRIMARY KEY (`IDMATERIA`);
+
+--
+-- Indices de la tabla `profesor`
+--
+ALTER TABLE `profesor`
+  ADD PRIMARY KEY (`CORREOPROF`);
+
+--
+-- Indices de la tabla `salon`
+--
+ALTER TABLE `salon`
+  ADD PRIMARY KEY (`NUMEROSALON`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `bloquehorario`
+--
+ALTER TABLE `bloquehorario`
+  MODIFY `IDBLOQUEHO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT de la tabla `hora`
+--
+ALTER TABLE `hora`
+  MODIFY `IDHORA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `materia`
+--
+ALTER TABLE `materia`
+  MODIFY `IDMATERIA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `administrador`
+--
+ALTER TABLE `administrador`
+  ADD CONSTRAINT `FK_ADMINIST_RELATIONS_GRUPOEST` FOREIGN KEY (`GRUPO`,`SEMESTREGRUPO`) REFERENCES `grupoestudiantes` (`GRUPO`, `SEMESTREGRUPO`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `bloquehorario`
+--
+ALTER TABLE `bloquehorario`
+  ADD CONSTRAINT `FK_BLOQUEHO_RELATIONS_GRUPOEST` FOREIGN KEY (`GRUPO`,`SEMESTREGRUPO`) REFERENCES `grupoestudiantes` (`GRUPO`, `SEMESTREGRUPO`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_BLOQUEHO_RELATIONS_MATERIA` FOREIGN KEY (`IDMATERIA`) REFERENCES `materia` (`IDMATERIA`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_BLOQUEHO_RELATIONS_PROFESOR` FOREIGN KEY (`CORREOPROF`) REFERENCES `profesor` (`CORREOPROF`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_BLOQUEHO_RELATIONS_SALON` FOREIGN KEY (`NUMEROSALON`) REFERENCES `salon` (`NUMEROSALON`) ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

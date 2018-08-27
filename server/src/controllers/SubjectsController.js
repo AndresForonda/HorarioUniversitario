@@ -14,6 +14,16 @@ module.exports = {
   async post (req, res) {
     try {
       const subject = await Subject.create(req.body)
+        .catch(Subject.ForeignKeyConstraintError = function () {
+          res.status(500).send({
+            error: 'Ocurrio un error intentando crear la materia'
+          })
+        })
+        .catch(Subject.UniqueConstraintError = function () {
+          res.status(500).send({
+            error: 'Ocurrio un error intentando crear la materia'
+          })
+        })
       res.send(subject)
     } catch (err) {
       if (err.errors[0].validatorKey === 'not_unique') {
@@ -35,6 +45,16 @@ module.exports = {
           id: req.body.id
         }
       })
+        .catch(Subject.ForeignKeyConstraintError = function () {
+          res.status(500).send({
+            error: 'Ocurrio un error intentando actualizar la materia'
+          })
+        })
+        .catch(Subject.UniqueConstraintError = function () {
+          res.status(500).send({
+            error: 'Ocurrio un error intentando actualizar la materia'
+          })
+        })
       res.send(subject)
     } catch (err) {
       res.status(500).send({
@@ -44,6 +64,7 @@ module.exports = {
   },
   async delete (req, res) {
     try {
+      console.log(req.params)
       const subject = await Subject.findOne({
         where: {
           id: req.params.id

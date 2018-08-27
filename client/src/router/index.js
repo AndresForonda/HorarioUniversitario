@@ -6,6 +6,7 @@ import Login from '@/components/Login'
 import Songs from '@/components/Songs'
 import CreateSong from '@/components/CreateSong'
 import Subjects from '@/components/Subjects'
+import Semesters from '@/components/Semesters'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/subjects',
       name: 'subjects',
       component: Subjects
+    },
+    {
+      path: '/semesters',
+      name: 'semesters',
+      component: Semesters
     }
   ]
 })

@@ -24,4 +24,9 @@ fs
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
+db.subjects = require('../models/Subject')(sequelize, Sequelize)
+db.semesters = require('../models/Semester')(sequelize, Sequelize)
+db.semesters.hasMany(db.subjects, {onDelete: 'restrict'})
+db.subjects.belongsTo(db.semesters)
+
 module.exports = db

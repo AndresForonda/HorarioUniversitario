@@ -22,6 +22,7 @@
     "morgan": "^1.9.0",
     "nodemon": "^1.18.3",
     "sequelize": "^4.38.0",
+    "sequelize-fixtures": "^0.7.0",
     "sqlite3": "^4.0.2"
   },
   "devDependencies": {

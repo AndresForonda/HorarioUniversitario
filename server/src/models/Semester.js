@@ -1,20 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
   const Semester = sequelize.define('Semester', {
-    semester: {
-      type: DataTypes.SMALLINT,
-      unique: true,
-      allowNull: false
-    },
-    grupoA: {
+    grupo_a: {
       type: DataTypes.BOOLEAN,
       allowNull: false
     },
-    grupoB: {
+    grupo_b: {
       type: DataTypes.BOOLEAN,
       allowNull: false
     },
-    grupoC: {
-      type: DataTypes.BOOLEAN
+    grupo_c: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   })
   return Semester

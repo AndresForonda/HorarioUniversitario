@@ -7,7 +7,10 @@ module.exports = {
     options: {
       dialect: process.env.DIALECT || 'sqlite',
       host: process.env.HOST || 'localhost',
-      storage: './horarioUniversidad.sqlite'
+      storage: './horarioUniversidad.sqlite',
+      define: {
+        underscored: true
+      }
     }
   },
   authentication: {

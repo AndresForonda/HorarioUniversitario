@@ -35,7 +35,7 @@
                       <v-select
                         :items="semesters"
                         label="Semestre"
-                        v-model="editedSubject.semester"
+                        v-model="editedSubject.semester_id"
                         solo
                         required
                         :rules="[required]"
@@ -54,8 +54,8 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" @click.native="close">Cancelar</v-btn>
-                <v-btn color="blue darken-1" @click.native="createSubject">Guardar</v-btn>
+                <v-btn color="blue darken-1" dark @click.native="close">Cancelar</v-btn>
+                <v-btn color="blue darken-1" dark @click.native="createSubject">Guardar</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -75,7 +75,7 @@
         :pagination.sync="pagination"
         class="headline">
         <template slot="items" slot-scope="props">
-          <td class="text-xs-center subheading">{{ props.item.semester }}</td>
+          <td class="text-xs-center subheading">{{ props.item.semester_id }}</td>
           <td class="text-xs-left subheading">{{ props.item.subject }}</td>
           <td class="justify-center layout px-0">
             <v-icon
@@ -128,6 +128,7 @@
 </template>
 <script>
 import SubjectsService from '@/services/SubjectsService'
+import SemestersService from '@/services/SemestersService'
 export default {
   data () {
     return {
@@ -135,17 +136,18 @@ export default {
       text: '',
       color: '',
       filas: 'Materias por página',
-      semesters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      semesters: [],
       dialog: false,
       search: '',
       pagination: {},
+      sem: {},
       subjects: [],
       headers: [
         {
           text: 'Semestre ',
           align: 'left',
           sortable: true,
-          value: 'semester',
+          value: 'semester_id',
           width: '40px',
           class: 'title'
         },
@@ -167,14 +169,14 @@ export default {
       ],
       editedIndex: -1,
       editedSubject: {
-        semester: '',
+        semester_id: '',
         subject: '',
-        lowerSubject: ''
+        lower_subject: ''
       },
       defaultSubject: {
-        semester: '',
+        semester_id: '',
         subject: '',
-        lowerSubject: ''
+        lower_subject: ''
       },
       required: (value) => !!value || 'Required.'
     }
@@ -195,7 +197,7 @@ export default {
     // Crear materia
     async createSubject () {
       this.error = null
-      this.editedSubject.lowerSubject = this.editedSubject.subject.toLowerCase().trim()
+      this.editedSubject.lower_subject = this.editedSubject.subject.toLowerCase().trim()
       const areAllFieldsFilledIn = Object
         .keys(this.editedSubject)
         .every(key => !!this.editedSubject[key])
@@ -278,11 +280,15 @@ export default {
         name: 'root'
       })
     }
+    this.sem = await SemestersService.index()
+    this.semesters = this.sem.data.map((value, index, array) => {
+      return value.id
+    })
   }
 }
 </script>
 <style>
   html {
-    overflow: hidden
+    overflow: auto
   }
 </style>

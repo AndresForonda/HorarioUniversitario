@@ -32,7 +32,7 @@ module.exports = (app) => {
   app.post('/semesters',
     SemestersController.post)
   app.put('/semesters',
-    SemestersController.post)
+    SemestersController.put)
   app.delete('/semesters/:id',
     SemestersController.delete)
 }

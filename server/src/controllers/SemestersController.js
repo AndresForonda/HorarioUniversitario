@@ -38,7 +38,7 @@ module.exports = {
     }
   },
   async delete (req, res) {
-    console.log(req)
+    console.log(req.body)
     try {
       const semester = await Semester.findOne({
         where: {

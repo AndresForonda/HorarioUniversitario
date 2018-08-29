@@ -228,6 +228,7 @@ export default {
     // Obtener todas las materias
     async getSubjects () {
       this.subjects = (await SubjectsService.index()).data
+      console.log(this.subjects)
     },
     close () {
       this.dialog = false

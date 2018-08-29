@@ -9,6 +9,13 @@
           v-if="$store.state.login.isUserLoggedIn"
           flat
           dark
+          to="semesters">
+          Semestres
+        </v-btn>
+        <v-btn
+          v-if="$store.state.login.isUserLoggedIn"
+          flat
+          dark
           to="subjects">
           Materias
         </v-btn>
